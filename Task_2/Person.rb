@@ -13,17 +13,12 @@ class Person
   end
 
   def valid?
-    puts "\n"
 
-    valid_name = Validation.valid_name?(@name)
+    valid_first_name = Validation.valid_name?(@first_name)
+    valid_last_name = Validation.valid_name?(@last_name)
     valid_id = Validation.valid_id?(@id)
     valid_birthdate = Validation.valid_date?(@birth_date)
 
-    puts "First name: #{first_name} | Is valid: #{first_name}"
-    puts "Last name: #{last_name} | Is valid: #{last_name}"
-    puts "ID: #{id} | Is valid: #{valid_id}"
-    puts "Birthdate: #{birth_date} | Is valid: #{valid_birthdate}"
-
-    valid_name && valid_id && valid_birthdate
+    valid_first_name && valid_last_name && valid_id && valid_birthdate
   end
 end
