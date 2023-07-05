@@ -17,7 +17,27 @@ class PersonRepository
     }
   end
 
+  def alreadyInDatabase(person)
+    getAll.each do |people|
+      if person.id === people[0]
+        return ErrorMessage.alreadyInDatabase
+      end
+    end
+  end
+
+  def notInDatabase(person)
+    getAll.each do |people|
+      if person.id != people[0]
+      return ErrorMessage.notInDatabase
+      end
+    end
+  end
+
+
+
   def add?(person)
+    alreadyInDatabase(person)
+
     @persons[person.id] = {
       first_name: person.first_name,
       last_name: person.last_name,
@@ -26,6 +46,8 @@ class PersonRepository
   end
 
   def edit?(person)
+    notInDatabase(person)
+
     @persons[person.id] = {
       first_name: person.first_name,
       last_name: person.last_name,
@@ -34,6 +56,8 @@ class PersonRepository
   end
 
   def delete(person)
+    notInDatabase(person)
+
     @persons.delete(person.id)
     return person
   end
@@ -43,7 +67,6 @@ class PersonRepository
   end
 
   def byFirstOrLastName(text)
-
     result = []
 
     @persons.each do |person|
@@ -52,7 +75,11 @@ class PersonRepository
       end
     end
 
-    return result
+    if result != []
+      return result
+    else
+      ErrorMessage.notFound
+    end
   end
 
   def getAll

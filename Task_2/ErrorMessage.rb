@@ -15,6 +15,16 @@ module ErrorMessage
     puts "Your id in not correct"
   end
 
+  def alreadyInDatabase
+    puts "This person already in database"
+  end
 
+  def notInDatabase
+    puts "This person is not in the database"
+  end
+
+  def notFound
+    puts "Nothing was found for your details"
+  end
 
 end
